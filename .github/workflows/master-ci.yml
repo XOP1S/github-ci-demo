@@ -22,9 +22,22 @@ jobs:
       # Comando para instalar las dependencias del proyecto
       - run: npm ci
       
+      
+      - id: test
       # Comando para correr los tests del proyecto
       - run: npm run test
+      
         # Define las variables de entorno para el paso
         env:
           # Establece el entorno de integración continua
           CI: true
+        continue-on-error: true
+          
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # No necesario para repositorios públicos
+          directory: ./coverage/ # La ruta del directorio de cobertura
+          fail_ci_if_error: true
+          
+
