@@ -39,5 +39,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }} # No necesario para repositorios públicos
           directory: ./coverage/ # La ruta del directorio de cobertura
           fail_ci_if_error: true
+       
+        if: always()
           
 
