@@ -13,31 +13,31 @@ jobs:
     # Pasos que se ejecutarán en el trabajo
     steps:
       # Acceso al contenido del repositorio
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
       
       # Nombre del siguiente paso
-      - name: Use Node.js
+    - name: Use Node.js
         # Configura un entorno Node.js
-        uses: actions/setup-node@v2
+      uses: actions/setup-node@v2
         
       # Comando para instalar las dependencias del proyecto
-      - run: npm ci
+    - run: npm ci
       
       
-      - id: test
+    - id: test
       # Comando para correr los tests del proyecto
-      - run: npm run test
+    - run: npm run test
       
         # Define las variables de entorno para el paso
-        env:
+      env:
           # Establece el entorno de integración continua
-          CI: true
-        continue-on-error: true
+         CI: true
+      continue-on-error: true
           
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }} # No necesario para repositorios públicos
-          directory: ./coverage/ # La ruta del directorio de cobertura
-          fail_ci_if_error: true
-        if: always()
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} # No necesario para repositorios públicos
+        directory: ./coverage/ # La ruta del directorio de cobertura
+        fail_ci_if_error: true
+      if: always()
